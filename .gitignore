@@ -1,0 +1,27 @@
+back/venv/
+.venv
+/venv
+*.pyc
+.idea
+/.vscode
+/venvAi
+
+# BackEnd
+**/.devcontainer
+**/__pycache__
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+**/migrations
+
+# FroneEnd
+/front/node_modules
+/front/.pnp
+/front/.pnp.js
+# testing
+/front/coverage
+# production
+/front/build
+
+
