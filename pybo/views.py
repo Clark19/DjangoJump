@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from django.views import generic
 
-from .models import Question
+from .models import Question, Answer
 
 
 def index(request):
@@ -37,3 +38,18 @@ def detail(request, question_id):
 #     pybo 내용 출력
 #     """
 #     model = Question
+
+
+
+def answer_create(request, question_id):
+    """
+    pybo 답변등록
+    """
+    question = get_object_or_404(Question, pk=question_id)
+
+    answer = Answer(question=question, content=request.POST.get('content'), create_date=timezone.now())
+    answer.save()
+    # 윗 2라인 대신 아래처럼 역참조 방식 사용가능 (단, freign키로 모델에 지정했을때 가능)
+    # question.answer_set.create(content=request.POST.get('content'), create_date=timezone.now())
+
+    return redirect('pybo:detail', question_id=question.id)
